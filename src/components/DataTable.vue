@@ -87,7 +87,7 @@ table {
 }
 
 thead {
-  background: var(--background-color);
+  background: var(--table-header-bg);
 }
 
 th {
@@ -149,7 +149,7 @@ td:last-child {
 }
 
 tr:hover td {
-  background-color: var(--background-color);
+  background-color: var(--table-row-hover);
 }
 
 tr:last-child td {

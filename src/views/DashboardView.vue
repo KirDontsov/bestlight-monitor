@@ -3,6 +3,10 @@
     <header class="dashboard-header">
       <h1 class="dashboard-title">Bestlight Monitor</h1>
       <div class="header-actions">
+        <button @click="toggleTheme" class="btn btn-theme" :title="isDark ? 'Светлая тема' : 'Тёмная тема'">
+          <span v-if="isDark">☀️</span>
+          <span v-else>🌙</span>
+        </button>
         <button @click="handleRefresh" class="btn btn-primary" :disabled="isLoading">
           <span v-if="isLoading" class="spinner"></span>
           <span v-else>🔄 Обновить</span>
@@ -56,6 +60,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useGoogleSheets } from '../composables/useGoogleSheets'
 import { useAuth } from '../composables/useAuth'
+import { useTheme } from '../composables/useTheme'
 import { config } from '../config'
 import SearchBar from '../components/SearchBar.vue'
 import DataTable from '../components/DataTable.vue'
@@ -64,6 +69,7 @@ import Pagination from '../components/Pagination.vue'
 const router = useRouter()
 const { data, isLoading, error, lastUpdated, hasData, count, loadData, refresh } = useGoogleSheets()
 const { logout } = useAuth()
+const { isDark, toggleTheme } = useTheme()
 
 const searchQuery = ref('')
 const sortKey = ref(null)
@@ -185,6 +191,18 @@ onMounted(() => {
 .header-actions {
   display: flex;
   gap: 0.5rem;
+}
+
+.btn-theme {
+  background: var(--background-color);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 0.5rem 0.75rem;
+  font-size: 1.25rem;
+}
+
+.btn-theme:hover {
+  background: var(--border-color);
 }
 
 .last-updated {

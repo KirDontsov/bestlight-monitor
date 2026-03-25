@@ -1,5 +1,9 @@
 <template>
   <div class="login-view">
+    <button @click="toggleTheme" class="theme-toggle" :title="isDark ? 'Светлая тема' : 'Тёмная тема'">
+      <span v-if="isDark">☀️</span>
+      <span v-else>🌙</span>
+    </button>
     <div class="login-card">
       <h1 class="login-title">Bestlight Monitor</h1>
       <p class="login-subtitle">Войдите для продолжения</p>
@@ -52,9 +56,11 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
+import { useTheme } from '../composables/useTheme'
 
 const router = useRouter()
 const { login, isLoading, error } = useAuth()
+const { isDark, toggleTheme } = useTheme()
 
 const loginForm = reactive({
   login: '',
@@ -76,6 +82,26 @@ async function handleSubmit() {
   align-items: center;
   justify-content: center;
   padding: 1rem;
+  position: relative;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--card-background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.75rem;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+
+.theme-toggle:hover {
+  background: var(--background-color);
 }
 
 .login-card {
