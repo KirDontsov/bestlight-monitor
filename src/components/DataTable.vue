@@ -91,7 +91,7 @@ thead {
 }
 
 th {
-  padding: 0.75rem 1rem;
+  padding: 0.5rem 0.75rem;
   text-align: left;
   font-weight: 600;
   font-size: 0.875rem;
@@ -112,6 +112,12 @@ th.sortable {
   padding-right: 2rem;
 }
 
+/* Last column wider */
+th:last-child {
+  width: 40%;
+  min-width: 300px;
+}
+
 th.sorted-asc,
 th.sorted-desc {
   background-color: var(--primary-color);
@@ -127,10 +133,19 @@ th.sorted-desc {
 }
 
 td {
-  padding: 0.75rem 1rem;
+  padding: 0.4rem 0.75rem;
   border-bottom: 1px solid var(--border-color);
   font-size: 0.875rem;
   color: var(--text-primary);
+  vertical-align: middle;
+}
+
+/* Last column wider */
+td:last-child {
+  width: 40%;
+  min-width: 300px;
+  white-space: normal;
+  word-wrap: break-word;
 }
 
 tr:hover td {
