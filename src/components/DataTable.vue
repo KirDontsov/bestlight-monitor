@@ -112,10 +112,36 @@ th.sortable {
   padding-right: 2rem;
 }
 
-/* Last column wider */
-th:last-child {
-  width: 40%;
-  min-width: 300px;
+/* Column widths */
+th:nth-child(1),
+td:nth-child(1) {
+  width: 12%;
+  min-width: 80px;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  width: 12%;
+  min-width: 100px;
+}
+
+th:nth-child(3),
+td:nth-child(3) {
+  width: 16%;
+  min-width: 120px;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 15%;
+  min-width: 140px;
+}
+
+/* Last column wider (status) */
+th:last-child,
+td:last-child {
+  width: 45%;
+  min-width: 250px;
 }
 
 th.sorted-asc,
@@ -154,22 +180,5 @@ tr:hover td {
 
 tr:last-child td {
   border-bottom: none;
-}
-
-.empty-message {
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-secondary);
-}
-
-/* Responsive table */
-@media (max-width: 768px) {
-  .data-table {
-    overflow-x: auto;
-  }
-  
-  table {
-    min-width: 800px;
-  }
 }
 </style>

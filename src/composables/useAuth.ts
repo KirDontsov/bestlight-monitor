@@ -1,7 +1,7 @@
 import { ref, Ref } from 'vue'
 import { hashPassword } from '../utils/hash'
-import { setAuthToken, clearAuthToken, isAuthenticated as checkIsAuthenticated } from '../utils/storage'
-import { config } from '../config'
+import { setAuthToken, clearAuthToken, isAuthenticated as checkIsAuthenticated, setSessionData } from '../utils/storage'
+import { config, type AuthUser } from '../config'
 
 /**
  * Composable for authentication logic
@@ -10,6 +10,17 @@ export function useAuth() {
   const isLoading: Ref<boolean> = ref(false)
   const error: Ref<string | null> = ref(null)
   const isAuthenticated: Ref<boolean> = ref(checkIsAuthenticated())
+  const currentUser: Ref<AuthUser | null> = ref(null)
+
+  /**
+   * Find user by login and verify password
+   */
+  function findUser(login: string, passwordHash: string): AuthUser | null {
+    const user = config.auth.users.find(
+      u => u.login.toLowerCase() === login.toLowerCase() && u.passwordHash === passwordHash
+    )
+    return user || null
+  }
 
   /**
    * Login with username and password
@@ -25,12 +36,14 @@ export function useAuth() {
       // Hash the password
       const passwordHash = await hashPassword(password)
 
-      // Verify against config
-      const isValid = login === config.auth.login && passwordHash === config.auth.passwordHash
+      // Find user in the list
+      const user = findUser(login, passwordHash)
 
-      if (isValid) {
+      if (user) {
         // Set auth token (simple session identifier)
-        setAuthToken(btoa(`${login}:${Date.now()}`))
+        setAuthToken(btoa(`${user.login}:${Date.now()}`))
+        setSessionData({ login: user.login, name: user.name || user.login, loginTime: Date.now() })
+        currentUser.value = user
         isAuthenticated.value = true
         return true
       } else {
@@ -51,6 +64,7 @@ export function useAuth() {
   function logout(): void {
     clearAuthToken()
     isAuthenticated.value = false
+    currentUser.value = null
   }
 
   /**
@@ -65,6 +79,7 @@ export function useAuth() {
     isLoading,
     error,
     isAuthenticated,
+    currentUser,
     login,
     logout,
     checkAuth

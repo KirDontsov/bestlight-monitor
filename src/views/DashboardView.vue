@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-view">
     <header class="dashboard-header">
-      <h1 class="dashboard-title">Bestlight Monitor</h1>
+      <h1 class="dashboard-title">Лучший свет [онлайн монитор] - ВСК</h1>
       <div class="header-actions">
         <button @click="toggleTheme" class="btn btn-theme" :title="isDark ? 'Светлая тема' : 'Тёмная тема'">
           <span v-if="isDark">☀️</span>
@@ -105,18 +105,18 @@ const filteredData = computed(() => {
     result.sort((a, b) => {
       const aVal = a[sortKey.value] || ''
       const bVal = b[sortKey.value] || ''
-      
+
       // Try numeric comparison first
       const aNum = parseFloat(aVal.replace(/\s/g, ''))
       const bNum = parseFloat(bVal.replace(/\s/g, ''))
-      
+
       let comparison = 0
       if (!isNaN(aNum) && !isNaN(bNum)) {
         comparison = aNum - bNum
       } else {
         comparison = String(aVal).localeCompare(String(bVal), 'ru')
       }
-      
+
       return sortOrder.value === 'asc' ? comparison : -comparison
     })
   }
@@ -127,7 +127,7 @@ const filteredData = computed(() => {
 // Get paginated data
 const paginatedData = computed(() => {
   if (!showPagination.value) return filteredData.value
-  
+
   const start = (currentPage.value - 1) * config.pagination.pageSize
   const end = start + config.pagination.pageSize
   return filteredData.value.slice(start, end)
