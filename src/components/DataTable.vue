@@ -115,33 +115,33 @@ th.sortable {
 /* Column widths */
 th:nth-child(1),
 td:nth-child(1) {
-  width: 12%;
-  min-width: 80px;
+  width: 8%;
+  min-width: 60px;
 }
 
 th:nth-child(2),
 td:nth-child(2) {
-  width: 12%;
-  min-width: 100px;
+  width: 8%;
+  min-width: 80px;
 }
 
 th:nth-child(3),
 td:nth-child(3) {
-  width: 16%;
-  min-width: 120px;
+  width: 10%;
+  min-width: 100px;
 }
 
 th:nth-child(4),
 td:nth-child(4) {
-  width: 15%;
-  min-width: 140px;
+  width: 10%;
+  min-width: 120px;
 }
 
 /* Last column wider (status) */
 th:last-child,
 td:last-child {
-  width: 45%;
-  min-width: 250px;
+  width: 64%;
+  min-width: 200px;
 }
 
 th.sorted-asc,
