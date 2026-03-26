@@ -5,7 +5,7 @@
       <span v-else>🌙</span>
     </button>
     <div class="login-card">
-      <h1 class="login-title">Лучший свет [онлайн монитор] - ВСК</h1>
+      <h1 class="login-title">Лучший свет - ВСК</h1>
       <p class="login-subtitle">Войдите для продолжения</p>
 
       <form @submit.prevent="handleSubmit" class="login-form">
@@ -53,7 +53,7 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '../composables/useAuth'
 import { useTheme } from '../composables/useTheme'
