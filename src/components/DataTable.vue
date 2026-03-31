@@ -121,14 +121,14 @@ td:nth-child(1) {
 
 th:nth-child(2),
 td:nth-child(2) {
-  width: 8%;
-  min-width: 80px;
+  width: 10%;
+  min-width: 100px;
 }
 
 th:nth-child(3),
 td:nth-child(3) {
-  width: 10%;
-  min-width: 100px;
+  width: 8%;
+  min-width: 80px;
 }
 
 th:nth-child(4),
